@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+<div class="p-5 mb-4 bg-light rounded-4">
+    <div class="row mb-3 h3 text-center">
+        <p>{{ team['team_name'] }}</p>
+    </div>
+    <div class="row mb-3 text-center">
+        {% if team['team_name']=='TOTTENHAM HOTSPUR FC' %}
+            <img style="max-height: auto; max-width: 20%; margin-left: auto; margin-right: auto;" src="{{url_for('static', filename='tottenham.png')}}" alt='tottenham' width="200" height="300">
+        {% elif team['team_name']=='MANCHESTER CITY FC'%}
+            <img style="max-height: auto; max-width: 20%; margin-left: auto; margin-right: auto;" src="{{url_for('static', filename='mancity.png')}}" alt='man city' width="200" height="300">
+        {% else %}
+            <img style="max-height: auto; max-width: 20%; margin-left: auto; margin-right: auto;" src="{{url_for('static', filename='defaultTeams.png')}}" alt='Default team icon' width="200" height="300">
+        {% endif %}   
+    </div>
+    <div class="row">
+        <p><strong>Matches Played: </strong> {{ team['matches_played'] }} </p>
+        <p><strong>Matches Played (Home): </strong> {{ team['matches_played_home'] }} </p>
+        <p><strong>Matches Played (Away): </strong> {{ team['matches_played_away'] }} </p>
+        <p><strong>Wins: </strong> {{ team['wins'] }} </p>
+        <p><strong>Wins (Home): </strong> {{ team['wins_home'] }} </p>
+        <p><strong>Wins (Away): </strong> {{ team['wins_away'] }} </p>
+        <p><strong>Draws: </strong> {{ team['draws'] }} </p>
+        <p><strong>Draws (Home): </strong> {{ team['draws_home'] }} </p>
+        <p><strong>Draws (Away): </strong> {{ team['draws_away'] }} </p>
+        <p><strong>Losses: </strong> {{ team['losses'] }} </p>
+        <p><strong>Losses (Home): </strong> {{ team['losses_home'] }} </p>
+        <p><strong>Losses (Away): </strong> {{ team['losses_away'] }} </p>
+        <p><strong>Goals Scored: </strong> {{ team['goals_scored'] }} </p>
+        <p><strong>Goals Scored (Home): </strong> {{ team['goals_scored_home'] }} </p>
+        <p><strong>Goals Scored (Away): </strong> {{ team['goals_scored_away'] }} </p>
+        <p><strong>Goals Conceded: </strong> {{ team['goals_conceded'] }} </p>
+        <p><strong>Goals Conceded (Home): </strong> {{ team['goals_conceded_home'] }} </p>
+        <p><strong>Goals Conceded (Away): </strong> {{ team['goals_conceded_away'] }} </p>
+        <p><strong>Clean Sheets: </strong> {{ team['clean_sheets'] }} </p>
+        <p><strong>Clean Sheets (Home): </strong> {{ team['clean_sheets_home'] }} </p>
+        <p><strong>Clean Sheets (Away): </strong> {{ team['clean_sheets_away'] }} </p>
+        <p><strong>Cards: </strong> {{ team['cards_total'] }} </p>
+        <p><strong>Cards (Home): </strong> {{ team['cards_total_home'] }} </p>
+        <p><strong>Cards (Away): </strong> {{ team['cards_total_away'] }} </p>
+        <p><strong>Average Possesion: </strong> {{ team['average_possession'] }} </p>
+        <p><strong>Average Possesion (Home): </strong> {{ team['average_possession_home'] }} </p>
+        <p><strong>Average Possesion (Away): </strong> {{ team['average_possession_away'] }} </p>
+        <p><strong>Shots: </strong> {{ team['shots'] }} </p>
+        <p><strong>Shots (On Target): </strong> {{ team['shots_on_target'] }} </p>
+        <p><strong>Shots (Off Target): </strong> {{ team['shots_off_target'] }} </p>
+        <p><strong>Fouls: </strong> {{ team['fouls'] }} </p>
+    </div>
+    
+</div>
+{% endblock %}

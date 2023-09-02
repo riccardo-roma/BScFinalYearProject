@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<div class="p-5 mb-4 bg-light rounded-4">
+    <h1 class="mb-3"> Find the most similar player or team:</h1>
+    <form method='POST' action='{{ url_for('main.engine') }}'>
+        {{ searchForm.hidden_tag() }}
+        {{ searchForm.search() }}
+        {{ searchForm.submit() }}
+    </form>
+ 
+    <h5 class="mt-3"> Results: </h5>   
+    {% for x in recomendations %}
+        {% if type == 'Player' %}
+        <a class='text-reset' href={{ url_for(collection, name=x.full_name) }}>{{ x['full_name'] }}</a> (<b>Position: </b> {{ x['position'] }}, <b> Team: </b> {{ x['Current Club'] }}, <b> Matches Played: </b> {{ x['appearances_overall'] }}) <br>
+        {% elif type == 'Team' %}
+        <a class='text-reset' href={{ url_for(collection, name=x.team_name) }}>{{ x['team_name'] }} </a> (<b> Record: </b> {{x['wins']}}-{{x['draws']}}-{{x['losses']}}, <b> Goals: </b> {{x['goals_scored']}}) <br>
+        {% endif %}
+    {% endfor %}
+    {% if type == 'Player' %}
+        <p class="mt-4"> These results are reccomended automatically based on the cosine simlarity between the players in the database. Note: Cosine similarity takes into acount only numerical inputs.</p>
+    {% elif type == 'Team' %}            
+        <p class="mt-4"> These results are reccomended automatically based on the cosine simlarity between the teams in the database. Note: Cosine similarity takes into acount only numerical inputs.</p>
+    {% endif %}
+    </div>
+</div>
+
+{% endblock %}

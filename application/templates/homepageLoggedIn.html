@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<div class="p-5 mb-4 bg-light rounded-4">
+    <h1> Welcome back {{ user['name'] }}!</h1> <br>
+    <div class="row">
+        <div class="col">
+            <canvas id="topScorers"> </canvas>
+        </div>
+        <div class="col">
+            <canvas id="mostWins"> </canvas>
+        </div>
+    </div>
+    <br>
+    {% if type == 'Team' %}
+        <p> <strong>You rank: </strong>{{ rank }}
+    {% elif type == 'Player' %}
+        <p> <strong>Your team ranks: </strong>{{ rank }}
+    {% endif %}
+</div>
+
+<div class="p-5 mb-4 bg-light rounded-4">
+    {% if showStats == 'Yes' %}
+        {% if type == 'Team' %}
+            <p> <strong>You played:  </strong>{{player['appearances_overall']}} games; <strong>You scored:</strong>  {{player['goals_overall']}} goals; <strong>Your bookings:</strong> {{player['yellow_cards_overall']}} yellow cards, {{player['red_cards_overall']}} red cards </p>
+        {% else %}
+            <p> <strong>Your team played: </strong>{{team['matches_played']}} games; <strong>Your team's record:</strong>  {{team['wins']}}-{{team['draws']}}-{{team['losses']}}; <strong>Your team scored:</strong> {{team['goals_scored']}} goals; <strong>Your team has a goal difference of: </strong>{{ goalDifference }}</p>        
+        {%endif%}
+    {% endif %}
+    <div class="row">
+        <canvas id="myStats" style="max-height: 600px; max-width: 50%; margin: auto;"> </canvas>
+    </div>
+    {% if type == 'Player' %}
+    <p class="h5"> Your Top 10 Goal Scorers: </p>
+        {% for scorer in teamTopGoalScorers %}
+            <p style="margin-left: 3%;"> - {{scorer['full_name']}} : {{scorer['goals_overall']}} Goals </p>
+        {% endfor %}
+    {% endif %}
+</div>
+
+{% if showResults == 'Yes' %}
+<div class='p-5 mb-4 bg-light rounded-4'>
+    <h5> These might interest you: </h5>
+    {% for x in recomendations %}
+        {% if type == 'Player' %}
+            <a class='text-reset' href={{ url_for('main.playerPersonalProfile', name=x.full_name) }}>{{ x['full_name'] }}</a> (<b>Position: </b> {{ x['position'] }}, <b> Team: </b> {{ x['Current Club'] }}, <b> Matches Played: </b> {{ x['appearances_overall'] }}) <br>
+        {% elif type == 'Team' %}
+            <a class='text-reset' href={{ url_for('main.teamPersonalProfile', name=x.team_name) }}>{{ x['team_name'] }}</a> (<b>Record: </b> {{x['wins']}}-{{x['draws']}}-{{x['losses']}}, <b> Goals: </b> {{x['goals_scored']}}) <br>
+        {% endif %}
+    {% endfor %}
+    <br>
+    {% if type == 'Team' %}
+        <p> These results are reccomended automatically based on the cosine simlarity between your team and the other teams in the database. Note: Cosine similarity takes into acount only numerical inputs.</p>
+    {% else %}
+    <p> These results are reccomended automatically based on the cosine simlarity between {{object}} and the other players in the database. Note: Cosine similarity takes into acount only numerical inputs.</p>           
+    {% endif %}
+</div>
+{% endif %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- CDN link for Chart.js -->
+<script>
+    const ctx = document.getElementById('topScorers');
+    var topScorersChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {{ playersDataLabels | safe }},
+            datasets: [
+                {
+                    data: {{ playersDataValues | safe }},
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.4)',
+                        'rgba(255, 159, 64, 0.4)',
+                        'rgba(255, 205, 86, 0.4)'
+                    ],
+                    borderColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(255, 159, 64)',
+                        'rgb(255, 205, 86)'
+                    ]
+                }
+            ]
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Top Goal Scorers (2018-2019 Season)'
+                },
+                legend: {
+                    display: false
+                }
+            }
+        } 
+    });
+    const ctx2 = document.getElementById('mostWins');
+    var mostWinsChart = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: {{ teamsDataLabels | safe }},
+            datasets: [
+                {
+                    label: 'Wins',
+                    data: {{ teamsDataValues | safe }},
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.4)',
+                        'rgba(153, 102, 255, 0.4)',
+                        'rgba(201, 203, 207, 0.4)'
+                    ],
+                    borderColor: [
+                        'rgb(54, 162, 235)',
+                        'rgb(153, 102, 255)',
+                        'rgb(201, 203, 207)'
+                    ]
+                }
+            ]
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Teams with most wins (2018-2019 Season)'
+                },
+                legend: {
+                    display: false
+                }
+            }
+        }  
+    });
+    const ctx3 = document.getElementById('myStats');
+    var myStatsChart = new Chart(ctx3, {
+        type: 'radar',
+        data: {
+            labels: {{ statsLabels | safe }},
+            datasets: [
+                {
+                    data: {{ statsValues | safe }},
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.4)',
+                        'rgba(255, 159, 64, 0.4)',
+                        'rgba(255, 205, 86, 0.4)'
+                    ],
+                    borderColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(255, 159, 64)',
+                        'rgb(255, 205, 86)'
+                    ]
+                }
+            ]
+        },
+        options: {
+            responsive: false,
+            plugins: {
+                title: {
+                    display: false,
+                    text: 'Your Stats'
+                },
+                legend: {
+                    display: false
+                }
+            }
+        } 
+    });
+</script>
+{% endblock %}

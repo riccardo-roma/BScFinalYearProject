@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+    <div class="p-5 mb-4 bg-light rounded-4">
+      <h2>Create a new account: </h2>
+      <a class="btn btn-primary" role="button" href='{{ url_for('auth.createTypeSpecificAccount', type = 'Player') }}'>Create a Player Account</a>
+      <a class="btn btn-primary" role="button" href='{{ url_for('auth.createTypeSpecificAccount', type = 'Manager') }}'>Create a Manager Account</a>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+<div class="p-5 mb-4 bg-light rounded-4">
+    <div class="row mb-3 h3 text-center">
+        <p>{{ player['full_name'] }}</p>
+    </div>
+    <div class="row mb-3 text-center"> 
+        {% if player['full_name']=='JONJO SHELVEY' %}
+            <img style="max-height: auto; max-width: 20%; margin-left: auto; margin-right: auto;" src="{{url_for('static', filename='jonjoshelvey.png')}}" alt='Jonjo Shelvey' width="200" height="300">
+        {% elif player['full_name']=='JONATHAN WALTERS'%}
+            <img style="max-height: auto; max-width: 20%; margin-left: auto; margin-right: auto;" src="{{url_for('static', filename='jonathanwalters.png')}}" alt='Jonathan Walters' width="200" height="300">
+        {% else %}
+            <img style="max-height: auto; max-width: 20%; margin-left: auto; margin-right: auto;" src="{{url_for('static', filename='default.png')}}" alt='Default player icon' width="200" height="300">
+        {% endif %}
+    </div>
+    <div class="row">
+        <p><strong>Birthday: </strong> {{ player['birthday_GMT'] }} </p>
+        <p><strong>Nationality: </strong> {{ player['nationality'] }} </p>
+        <p><strong>Position: </strong> {{ player['position'] }} </p>
+        <p><strong>Current Club: </strong> {{ player['Current Club'] }} </p>
+        <p><strong>Minutes Played (Total): </strong> {{ player['minutes_played_overall'] }} </p>
+        <p><strong>Minutes Played (Home): </strong> {{ player['minutes_played_home'] }} </p>
+        <p><strong>Minutes Played (Away): </strong> {{ player['minutes_played_away'] }} </p>
+        <p><strong>Appearances (Total): </strong> {{ player['appearances_overall'] }} </p>
+        <p><strong>Appearances (Home): </strong> {{ player['appearances_home'] }} </p>
+        <p><strong>Appearances (Away): </strong> {{ player['appearances_away'] }} </p>
+        <p><strong>Goals (Total): </strong> {{ player['goals_overall'] }} </p>
+        <p><strong>Goals (Home): </strong> {{ player['goals_home'] }} </p>
+        <p><strong>Goals (Away): </strong> {{ player['goals_away'] }} </p>
+        <p><strong>Assists (Total): </strong> {{ player['assists_overall'] }} </p>
+        <p><strong>Assists (Home): </strong> {{ player['assists_home'] }} </p>
+        <p><strong>Assists (Away): </strong> {{ player['assists_away'] }} </p>
+        <p><strong>Penalties (Scored): </strong> {{ player['penalty_goals'] }} </p>
+        <p><strong>Penalties (Missed): </strong> {{ player['penalty_misses'] }} </p>
+        <p><strong>Clean Sheets: </strong> {{ player['clean_sheets_overall'] }} </p>
+        <p><strong>Yellow Cards: </strong> {{ player['yellow_cards_overall'] }} </p>
+        <p><strong>Red Cards: </strong> {{ player['red_cards_overall'] }} </p>
+    </div>
+</div>
+
+
+{% endblock %}

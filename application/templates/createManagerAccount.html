@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<div class="p-5 mb-4 bg-light rounded-4">
+    <h2>Create a new account: </h2>
+    <form method="POST" action="{{ url_for("auth.createTypeSpecificAccount", type="Manager") }}">
+        {{ form.hidden_tag() }}
+        <div class='mb-3'>
+          {{ form.name.label(class_='form-label') }}
+          {{ form.name(class_='form-control', placeholder='John Smith') }}
+          {% for error in form.name.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        <div class='mb-3'>
+          {{ form.email.label(class_='form-label') }}
+          {{ form.email(class_='form-control', placeholder='example@gmail.com') }}
+          {% for error in form.email.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        <div class='mb-3'>
+            {{ form.birthday_GMT.label(class_='form-label') }}
+            {{ form.birthday_GMT(class_='form-control') }}
+            {% for error in form.birthday_GMT.errors %}
+              {{error}}
+            {% endfor %}
+          </div>
+
+        <div class='mb-3'>
+            {{ form.team.label(class_='form-label') }}
+            {{ form.team(class_='form-control') }}
+            {% for error in form.team.errors %}
+              {{error}}
+            {% endfor %}
+          </div>
+
+        <div class='mb-3'>
+          {{ form.password.label(class_='form-label') }}
+          {{ form.password(class_='form-control') }}
+          {% for error in form.password.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        <div class='mb-3'>
+          {{ form.checkPassword.label(class_='form-label') }}
+          {{ form.checkPassword(class_='form-control') }}
+          {% for error in form.checkPassword.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        {{ form.submit(class_='btn btn-primary') }}
+        
+      </form>
+    </div>
+
+{% endblock %}

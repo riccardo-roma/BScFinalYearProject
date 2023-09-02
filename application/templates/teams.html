@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+<form class='p-3 mb-2 rounded-4'  method='POST' action='{{ url_for('main.teams') }}'>
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+        {{ form.name.label(class_='form-label') }}
+        {{ form.name(class_='form-control') }}
+    </div>
+    <div class="mb-3">
+        {{ form.minGoalsScored.label(class_='form-label') }}
+        {{ form.minGoalsScored(class_='form-control') }}
+    </div>
+    <div class="mb-3">
+        {{ form.maxGoalsConceded.label(class_='form-label') }}
+        {{ form.maxGoalsConceded(class_='form-control') }}
+    </div>
+    <div class="mb-3">
+        {{ form.minWins.label(class_='form-label') }}
+        {{ form.minWins(class_='form-control') }}
+    </div>
+    <div class="mb-3">
+        {{ form.maxLosses.label(class_='form-label') }}
+        {{ form.maxLosses(class_='form-control') }}
+    </div>
+    <div class="mb-3">
+        {{ form.submit() }}
+    </div>
+</form>
+
+{% for team in teams %}
+
+<div class='p-5 mb-4 bg-light rounded-4'>
+    <div class='row mb-3'>
+        <div class='col text-center'>
+            <p class='h3'>{{ team['team_name'] }}</p>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col mb-3 text-center'>
+            {% if team['team_name']=='TOTTENHAM HOTSPUR FC' %}
+                <img src="{{url_for('static', filename='tottenham.png')}}" alt='Jonjo Shelvey' width="200" height="300">
+            {% elif team['team_name']=='MANCHESTER CITY FC'%}
+                <img src="{{url_for('static', filename='mancity.png')}}" alt='Jonathan Walters' width="200" height="300">
+            {% else %}
+                <img src="{{url_for('static', filename='defaultTeams.png')}}" alt='Default player icon' width="200" height="300">
+            {% endif %}
+        </div>
+        <div class='col mb-3'>
+            <p><strong>Matches Played: </strong>{{ team['matches_played'] }} </p>
+            <p><strong>Wins: </strong>{{ team['wins'] }} </p>
+            <p><strong>Draws: </strong>{{ team['draws'] }} </p>
+            <p><strong>Losses: </strong>{{ team['losses'] }} </p>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col text-center'>
+            <a href={{ url_for('main.teamPersonalProfile', name=team.team_name) }}>More info</a>
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+
+{% endblock %}

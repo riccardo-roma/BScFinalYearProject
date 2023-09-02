@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+<form class='p-3 mb-2 rounded-4'  method='POST' action='{{ url_for('main.players') }}'>
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+        {{ form.name.label(class_='form-label') }}
+        {{ form.name(class_='form-control') }}
+    </div>
+    <div class="mb-3">
+        {{ form.position.label(class_='form-label') }}
+        {{ form.position() }}
+    </div>
+    <div class="mb-3">
+        {{ form.minMatchesPlayed.label(class_='form-label') }}
+        {{ form.minMatchesPlayed(class_='form-control') }}
+    </div>
+    <div class="mb-3">
+        {{ form.minGoalsScored.label(class_='form-label') }}
+        {{ form.minGoalsScored(class_='form-control') }}
+    </div>
+    <div class="mb-3">
+        {{ form.assists.label(class_='form-label') }}
+        {{ form.assists(class_='form-control') }}
+    </div>
+    <div class="mb-3">
+        {{ form.cleanSheets.label(class_='form-label') }}
+        {{ form.cleanSheets(class_='form-control') }}
+    </div>
+    <div class="mb-3">
+        {{ form.submit() }}
+    </div>
+</form>
+
+{% for player in players %}
+
+<div class='p-5 mb-4 bg-light rounded-4'>
+    <div class='row mb-3'>
+        <div class='col text-center'>
+            <p class='h3'>{{ player['full_name'] }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class='col mb-3 text-center'>
+            {% if player['full_name']=='JONJO SHELVEY' %}
+                <img src="{{url_for('static', filename='jonjoshelvey.png')}}" alt='Jonjo Shelvey' width="200" height="300">
+            {% elif player['full_name']=='JONATHAN WALTERS'%}
+                <img src="{{url_for('static', filename='jonathanwalters.png')}}" alt='Jonathan Walters' width="200" height="300">
+            {% else %}
+                <img src="{{url_for('static', filename='default.png')}}" alt='Default player icon' width="200" height="300">
+            {% endif %}
+        </div>
+        <div class='col mb-3'>
+            <p><strong>Birthday: </strong>{{ player['birthday_GMT'] }} </p>
+            <p><strong>Nationality: </strong>{{ player['nationality'] }} </p>
+            <p><strong>Position: </strong>{{ player['position'] }} </p>
+            <p><strong>Current Club: </strong>{{ player['Current Club'] }} </p>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col text-center'>
+            <a href={{ url_for('main.playerPersonalProfile', name=player.full_name) }}>More info</a>
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+
+{% endblock %}

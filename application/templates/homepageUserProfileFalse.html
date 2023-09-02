@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<div class="p-5 mb-4 bg-light rounded-4">
+    <h1> Welcome back {{ user['name'] }}!</h1> <br>
+    <div class="row">
+        <div class="col">
+            <canvas id="topScorers"> </canvas>
+        </div>
+        <div class="col">
+            <canvas id="mostWins"> </canvas>
+        </div>
+    </div>
+    <div class="row"> <p> Add some statistics to access the full experience! </p></div>
+    <br> 
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- CDN link for Chart.js -->
+<script>
+    const ctx = document.getElementById('topScorers');
+    var topScorersChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {{ playersDataLabels | safe }},
+            datasets: [
+                {
+                    data: {{ playersDataValues | safe }},
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.4)',
+                        'rgba(255, 159, 64, 0.4)',
+                        'rgba(255, 205, 86, 0.4)'
+                    ],
+                    borderColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(255, 159, 64)',
+                        'rgb(255, 205, 86)'
+                    ]
+                }
+            ]
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Top Goal Scorers (2018-2019 Season)'
+                },
+                legend: {
+                    display: false
+                }
+            }
+        } 
+    });
+    const ctx2 = document.getElementById('mostWins');
+    var mostWinsChart = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: {{ teamsDataLabels | safe }},
+            datasets: [
+                {
+                    label: 'Wins',
+                    data: {{ teamsDataValues | safe }},
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.4)',
+                        'rgba(153, 102, 255, 0.4)',
+                        'rgba(201, 203, 207, 0.4)'
+                    ],
+                    borderColor: [
+                        'rgb(54, 162, 235)',
+                        'rgb(153, 102, 255)',
+                        'rgb(201, 203, 207)'
+                    ]
+                }
+            ]
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Teams with most wins (2018-2019 Season)'
+                },
+                legend: {
+                    display: false
+                }
+            }
+        }  
+    });
+</script>
+{% endblock %}

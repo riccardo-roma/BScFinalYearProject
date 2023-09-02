@@ -1,0 +1,268 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<div class="p-5 mb-4 bg-light rounded-4">
+    <h1> Edit your Teams profile: </h1>
+    <form method="POST" action="{{ url_for("main.manageProfile") }}">
+        {{ form.hidden_tag() }}
+
+        <div class='mb-3'>
+          {{ form.team.label(class_='form-label') }}
+          {{ form.team(class_='form-control') }}
+          {% for error in form.team.errors %}
+          {{error}}
+        {% endfor %}
+      </div>
+
+        <div class='mb-3'>
+            {{ form.matches_played.label(class_='form-label') }}
+            {{ form.matches_played(class_='form-control') }}
+            {% for error in form.matches_played.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        <div class='mb-3'>
+            {{ form.matches_played_home.label(class_='form-label') }}
+            {{ form.matches_played_home(class_='form-control') }}
+            {% for error in form.matches_played_home.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        <div class='mb-3'>
+            {{ form.matches_played_away.label(class_='form-label') }}
+            {{ form.matches_played_away(class_='form-control') }}
+            {% for error in form.matches_played_away.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        <div class='mb-3'>
+            {{ form.wins.label(class_='form-label') }}
+            {{ form.wins(class_='form-control') }}
+            {% for error in form.wins.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        <div class='mb-3'>
+            {{ form.wins_home.label(class_='form-label') }}
+            {{ form.wins_home(class_='form-control') }}
+            {% for error in form.wins_home.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        <div class='mb-3'>
+            {{ form.wins_away.label(class_='form-label') }}
+            {{ form.wins_away(class_='form-control') }}
+            {% for error in form.wins_away.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        <div class='mb-3'>
+            {{ form.draws.label(class_='form-label') }}
+            {{ form.draws(class_='form-control') }}
+            {% for error in form.draws.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        <div class='mb-3'>
+            {{ form.draws_home.label(class_='form-label') }}
+            {{ form.draws_home(class_='form-control')}}
+            {% for error in form.draws_home.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        <div class='mb-3'>
+            {{ form.draws_away.label(class_='form-label') }}
+            {{ form.draws_away(class_='form-control')}}
+            {% for error in form.draws_away.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        <div class='mb-3'>
+            {{ form.losses.label(class_='form-label') }}
+            {{ form.losses(class_='form-control')}}
+            {% for error in form.losses.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        <div class='mb-3'>
+            {{ form.losses_home.label(class_='form-label') }}
+            {{ form.losses_home(class_='form-control')}}
+            {% for error in form.losses_home.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        <div class='mb-3'>
+            {{ form.losses_away.label(class_='form-label') }}
+            {{ form.losses_away(class_='form-control')}}
+            {% for error in form.losses_away.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        <div class='mb-3'>
+            {{ form.goals_scored.label(class_='form-label') }}
+            {{ form.goals_scored(class_='form-control')}}
+            {% for error in form.goals_scored.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        <div class='mb-3'>
+            {{ form.goals_conceeded.label(class_='form-label') }}
+            {{ form.goals_conceeded(class_='form-control')}}
+            {% for error in form.goals_conceeded.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        <div class='mb-3'>
+          {{ form.goals_scored_home.label(class_='form-label') }}
+          {{ form.goals_scored_home(class_='form-control')}}
+          {% for error in form.goals_scored_home.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        <div class='mb-3'>
+          {{ form.goals_scored_away.label(class_='form-label') }}
+          {{ form.goals_scored_away(class_='form-control')}}
+          {% for error in form.goals_scored_away.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        <div class='mb-3'>
+            {{ form.goals_conceeded_home.label(class_='form-label') }}
+            {{ form.goals_conceeded_home(class_='form-control')}}
+            {% for error in form.goals_conceeded_home.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        <div class='mb-3'>
+            {{ form.goals_conceeded_away.label(class_='form-label') }}
+            {{ form.goals_conceeded_away(class_='form-control')}}
+            {% for error in form.goals_conceeded_away.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        <div class='mb-3'>
+            {{ form.clean_sheets.label(class_='form-label') }}
+            {{ form.clean_sheets(class_='form-control')}}
+            {% for error in form.clean_sheets.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        <div class='mb-3'>
+            {{ form.clean_sheets_home.label(class_='form-label') }}
+            {{ form.clean_sheets_home(class_='form-control')}}
+            {% for error in form.clean_sheets_home.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        <div class='mb-3'>
+            {{ form.clean_sheets_away.label(class_='form-label') }}
+            {{ form.clean_sheets_away(class_='form-control')}}
+            {% for error in form.clean_sheets_away.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        <div class='mb-3'>
+            {{ form.cards_total.label(class_='form-label') }}
+            {{ form.cards_total(class_='form-control')}}
+            {% for error in form.cards_total.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        <div class='mb-3'>
+          {{ form.cards_total_home.label(class_='form-label') }}
+          {{ form.cards_total_home(class_='form-control')}}
+          {% for error in form.cards_total_home.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        <div class='mb-3'>
+          {{ form.cards_total_away.label(class_='form-label') }}
+          {{ form.cards_total_away(class_='form-control')}}
+          {% for error in form.cards_total_away.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        <div class='mb-3'>
+            {{ form.average_possesion.label(class_='form-label') }}
+            {{ form.average_possesion(class_='form-control')}}
+            {% for error in form.average_possesion.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        <div class='mb-3'>
+            {{ form.average_possesion_home.label(class_='form-label') }}
+            {{ form.average_possesion_home(class_='form-control')}}
+            {% for error in form.average_possesion_home.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        <div class='mb-3'>
+            {{ form.average_possesion_away.label(class_='form-label') }}
+            {{ form.average_possesion_away(class_='form-control')}}
+            {% for error in form.average_possesion_away.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        <div class='mb-3'>
+            {{ form.shots.label(class_='form-label') }}
+            {{ form.shots(class_='form-control')}}
+            {% for error in form.shots.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        <div class='mb-3'>
+            {{ form.shots_on_target.label(class_='form-label') }}
+            {{ form.shots_on_target(class_='form-control')}}
+            {% for error in form.shots_on_target.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        <div class='mb-3'>
+          {{ form.shots_off_target.label(class_='form-label') }}
+          {{ form.shots_off_target(class_='form-control')}}
+          {% for error in form.shots_off_target.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        <div class='mb-3'>
+          {{ form.fouls.label(class_='form-label') }}
+          {{ form.fouls(class_='form-control')}}
+          {% for error in form.fouls.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
+
+        {{ form.submit(class_='btn btn-primary') }} <strong>OR</strong> <a class="btn btn-danger" href='{{ url_for('main.deleteEntry', type = 'Team') }}'>Delete your Team profile</a><br>
+
+{% endblock %}
