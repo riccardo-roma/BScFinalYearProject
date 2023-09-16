@@ -35,6 +35,8 @@ Bo Yuan and Tatiana Tyukina
 10. Use command: export FLASK_APP=application
 11. Use command: flask run to run the software.
 
+### Note
+
 This application works with a local connection to a MongoDB database. The DB should contain 3 collections:
 
 - Users:
